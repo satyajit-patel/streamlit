@@ -29,7 +29,7 @@ with col2:
 import pandas as pd
 import sys
 
-file = st.file_uploader('upload file')
+file = st.file_uploader('upload csv file to see stats')
 if file:
     if file.type != 'text/csv':
         st.error('Please upload a CSV file')
@@ -47,3 +47,28 @@ if file:
     selected_personality = st.selectbox('filter by personalities', personalities)
     filtered_df = df[df['Personality'] == selected_personality] # new filtered table
     st.write(filtered_df.head())
+
+
+import requests
+
+if st.button('get a joke'):
+    response = requests.get('https://official-joke-api.appspot.com/random_joke')
+    if response.status_code == 200:
+        joke = response.json()
+        setup = joke['setup']
+        punchline = joke['punchline']
+        st.write(setup)
+        st.write(punchline)
+    else:
+        st.write('server is down. please try after some time')
+
+if st.button('get a quote'):
+    response = requests.get('https://zenquotes.io/api/random')
+    if response.status_code == 200:
+        quote = response.json()
+        line = quote[0]['q']
+        author = quote[0]['a']
+        st.success(line)
+        st.write(f'- {author}')
+    else:
+        st.write('server is down. please try after some time')
