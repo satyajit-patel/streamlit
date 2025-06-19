@@ -69,7 +69,7 @@ if file:
 
 
         # step 2 (make embeddings)
-        embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-exp-03-07")
+        embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-exp-03-07", google_api_key=GOOGLE_API_KEY)
 
 
 
